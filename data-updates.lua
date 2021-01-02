@@ -107,6 +107,9 @@ for _, pipes in pairs(data.raw.item) do
 		else 
 			bonus = math.floor((baseout*0.4) + ((tier-2)*(baseout*0.15)) )
 		end
+
+		local metal,check = string.gsub(pipes.name,"-pipe","")
+		if check == 0 then metal = "iron" end
 		
 	local drillrec = RecGen:create("OmniSea","omnic-water-fracking-".. pipes.name):
 		setIngredients({type="fluid",name="coromnic-vapour",amount=100}, {type="item",name= pipes.name,amount=1}):
@@ -116,8 +119,7 @@ for _, pipes in pairs(data.raw.item) do
 		setEnergy(4.0):
 		setCategory("omnidrilling"):
 		setSubgroup("omnisea-fluid-generation"):
-		setOrder(tier.."-"..pipes.order):
-		marathon()
+		setOrder(tier.."-"..pipes.order)
 		if tier == 1 then
 			drillrec:setTechName("omnitech-omnidrill-1")
 		else
@@ -125,7 +127,8 @@ for _, pipes in pairs(data.raw.item) do
 			setTechPacks(2+math.floor(tier/2)):
 			setTechCost(25+math.floor((tier/2)*25)):
 			setTechTime(15):
-			setTechIcons("tech-"..pipes.name,"OmniSea")
+			setTechIcons("tech-"..pipes.name,"OmniSea"):
+			setTechLocName("omnitech-drilling-equipment",{"material-name."..metal})
 		end
 		drillrec:setTechPrereq(techreq)
 		drillrec:extend()
