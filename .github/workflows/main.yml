@@ -9,5 +9,4 @@ jobs:
         uses: Roang-zero1/factorio-mod-luacheck@master
         with:
           luacheckrc_url: https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/1.1.0/.luacheckrc
-          args: --ignore W113
-          ignore: 113, W113
+          args: --ignore W113 --ignore 113 -ignore W113 -ignore 113
