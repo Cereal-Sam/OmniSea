@@ -8,6 +8,6 @@ jobs:
       - name: lint
         uses: Roang-zero1/factorio-mod-luacheck@master
         with:
-          luacheckrc_url: https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/1.1.0/.luacheckrc --ignore W113 --ignore 113 -ignore W113 -ignore 113
-          args: --ignore W113 --ignore 113 -ignore W113 -ignore 113
+          luacheckrc_url: https://raw.githubusercontent.com/Nexela/Factorio-luacheckrc/1.1.0/.luacheckrc
+          args: --ignore W113 --ignore 113 -ignore W113 -ignore 113, --ignore --W113 --113
           ignore: --113 --W113
