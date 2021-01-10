@@ -46,10 +46,11 @@ if mods["omnimatter_energy"] then
 
     --Energy adds anabracity as prereq for everything electricity related without prereqs, remove that from sb-startup-1 to avoid loops
     omni.lib.remove_prerequisite("sb-startup1", "omnitech-anbaricity")
-    omni.lib.remove_prerequisite("sct-lab-t2", "electronics")
+    
     --avoid tech loop
     omni.lib.remove_prerequisite("basic-chemistry","automation")
     omni.lib.remove_prerequisite("ore-crushing","automation")
+    --omni.lib.remove_prerequisite("omnitech-anbaricity","automation-science-pack")
 
     if mods["ScienceCostTweakerM"] then
         --SCT adds a split Lab+SP tech, edit the lab one to unlock the omnitor lab and move SCT lab stuff to the anbaric lab
@@ -64,7 +65,33 @@ if mods["omnimatter_energy"] then
 
         --Add unlock for the omnitor lab
         omni.lib.add_unlock_recipe("sct-lab-t1","omnitor-lab")
-        
+
+        --Remove logistic sp from electronics (required for logi SP)
+        omni.lib.remove_science_pack("electronics", "logistic-science-pack")
+        --Remove anbaric lab as preref from logi SP
+        omni.lib.remove_prerequisite("logistic-science-pack", "omnitech-anbaric-lab")
+        --Add anbaric lab as prereq for T2 lab
+        omni.lib.add_prerequisite("sct-lab-t2", "omnitech-anbaric-lab")
+
+        --Remove the boiler unlock from steam-power to its own tech (steam required for carbon which is required for greens)
+        omni.lib.remove_unlock_recipe("omnitech-steam-power","boiler")
+        --Copy boiler-2 if bobpower is active, else move it to chemistry
+        if mods["bobpower"] then
+            TechGen:import("bob-boiler-2"):
+                setName("bob-boiler-1"):
+                setPrereq("omnitech-anbaricity"):
+                setPacks(1):
+                setCost(20):
+                nullUnlocks():
+                addUnlocks("boiler"):
+                extend()
+
+            omni.lib.add_prerequisite("basic-chemistry","bob-boiler-1")
+            omni.lib.add_prerequisite("bob-boiler-2","bob-boiler-1")
+        else
+            omni.lib.add_unlock_recipe("basic-chemistry","boiler")
+        end
+ 
         --Copy over icon and localised stuff
         data.raw.technology["omnitech-anbaric-lab"].icon_size = data.raw.technology["sct-lab-t1"].icon_size
         data.raw.technology["omnitech-anbaric-lab"].icon = data.raw.technology["sct-lab-t1"].icon
@@ -111,8 +138,4 @@ if mods["omnimatter_energy"] then
     omni.lib.remove_unlock_recipe(omni.sea.tech4, "steam-engine")
     omni.lib.remove_unlock_recipe(omni.sea.tech4, "radar")
     omni.lib.add_unlock_recipe("omnitech-anbaricity", "radar")
-
-
-
-
 end
