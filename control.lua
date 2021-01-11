@@ -31,16 +31,22 @@ function checkCraftResultTechs(player,inventory)
     if inv.get_item_count("omnite") > 0 then
     player.force.technologies["sb-startup1"].researched = true
     end
-    if game.active_mods["omnimatter_energy"] then
+	if game.active_mods["omnimatter_energy"] then
+		if inv.get_item_count("omnicium-plate") > 0 then
+        	player.force.technologies["sb-startup2"].researched = true
+        end
         if inv.get_item_count("omnitor") > 0 then
-        player.force.technologies["sb-startup2"].researched = true
+        	player.force.technologies["sb-startup3"].researched = true
         end
         if inv.get_item_count("omnitor-lab") > 0 then
-            if player.force.technologies["sct-research-t1"] then
-            player.force.technologies["sct-research-t1"].researched = true
+            if player.force.technologies["sct-automation-science-pack"] then
+            	player.force.technologies["sct-automation-science-pack"].researched = true
             else
-            player.force.technologies["sb-startup4"].researched = true
-            end
+            	player.force.technologies["sb-startup4"].researched = true
+			end
+			if player.force.technologies["sct-lab-t1"] then
+				player.force.technologies["sct-lab-t1"].researched = true
+			end
         end
     end
 end

@@ -1,6 +1,8 @@
 ---------------------------------------------------------------------------------------------------
 Version: 4.1.3
-Date: 2021.01.10
+Date: 2021.01.11
+  Changes:
+    - Rewrote startup techs with omni energy. This should give you a clearer way on how to start
   Bugfixes:
     - Fixed a deadlock with the SCT T2 lab (moved electronics and boilers to red sp techs)
 ---------------------------------------------------------------------------------------------------
