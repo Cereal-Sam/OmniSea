@@ -46,7 +46,7 @@ local omnisludge = RecChain:create("OmniSea","hypomnic-water-omnitraction"):
 	
 --If Omniwater is not present, add Viscous Mud Water extraction + Research
 if not mods["omnimatter_water"] then
-	omni.add_omniwater_extraction("OmniSea", "water-viscous-mud", omni.fluid_levels, 2, 90, false)	
+	omni.matter.add_omniwater_extraction("OmniSea", "water-viscous-mud", omni.fluid_levels, 2, 90, false)	
 end
 
 -- Petromnic Waste Water
