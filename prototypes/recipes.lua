@@ -27,6 +27,7 @@ local cost = OmniGen:create():
     linearPercentOutput(720,0.75,1)
 local omnisludge = RecChain:create("OmniSea","hypomnic-water-omnitraction"):
 	setName("hypomnic-water-omnitraction"):
+	setLocName("recipe-name.hypomnic-water-omnitraction"):
 	setIngredients(cost:ingredients()):
 	setCategory("omnite-extraction-both"):
 	setIcons("hypomnic-water"):

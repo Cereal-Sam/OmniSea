@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 4.1.6
+Date: 2021.01.30
+  Bugfixes:
+    - Fixed that coromnic vapour recipes were not unlocked with the ommnicompressor anymore
+    - Fixed various broken localisations
+---------------------------------------------------------------------------------------------------
 Version: 4.1.5
 Date: 2021.01.22
   Info:

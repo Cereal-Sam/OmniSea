@@ -175,6 +175,6 @@ for i, rec in pairs(data.raw.recipe) do
 		order = "omnisea-void-"..rec.name
 	}
 	})
-	omni.lib.add_prerequisite("omnitech-omnidrill-1", "omnisea-void-"..rec.name)
+	omni.lib.add_unlock_recipe("omnitech-omnidrill-1", "omnisea-void-"..rec.name)
 	end
 end

@@ -43,6 +43,7 @@ BuildGen:create("OmniSea","omnidensator-2"):
         animation_speed = 0.5
     }):
 	setTechName("omnitech-omnidensator-2"):
+	setTechLocName("omnitech-omnidensator", 2):
 	setTechIcons("omnidensator-2-tech","OmniSea"):
 	setTechPacks(2):
 	setTechCost(150):
@@ -53,7 +54,6 @@ BuildGen:create("OmniSea","omnidensator-2"):
 	
 
 --Omnidrill	
-	
 BuildGen:create("OmniSea","omnidrill-1"):
 	setStacksize(10):
 	setFluidBox("XXWXX.XXXXX.XXXXX.XXXXX.XXKXX"):
@@ -74,6 +74,7 @@ BuildGen:create("OmniSea","omnidrill-1"):
         animation_speed = 0.5
     }):
 	setTechName("omnitech-omnidrill-1"):
+	setTechLocName("omnitech-omnidrill", 1):
 	setTechIcons("omnidrill-1-tech","OmniSea"):
 	setTechPacks(3):
 	setTechCost(200):
@@ -102,6 +103,7 @@ BuildGen:create("OmniSea","omnidrill-2"):
         animation_speed = 0.5
     }):
 	setTechName("omnitech-omnidrill-2"):
+	setTechLocName("omnitech-omnidrill", 2):
 	setTechIcons("omnidrill-2-tech","OmniSea"):
 	setTechPacks(4):
 	setTechCost(400):
@@ -130,6 +132,7 @@ BuildGen:create("OmniSea","omnidrill-3"):
         animation_speed = 0.5
     }):
 	setTechName("omnitech-omnidrill-3"):
+	setTechLocName("omnitech-omnidrill",3):
 	setTechIcons("omnidrill-3-tech","OmniSea"):
 	setTechPacks(5):
 	setTechCost(300):
