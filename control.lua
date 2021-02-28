@@ -38,17 +38,18 @@ local function call_remote_interfaces()
 		--Omnimatter Energy : complete overhaul
 		if game.active_mods["omnimatter_energy"] then
 			local tech4 = {"sb-startup4"}
-			if game.active_mods["ScienceCostTweaker"] then tech4 = {"sct-automation-science-pack", "sct-lab-t1"} end
+			if game.active_mods["ScienceCostTweakerM"] then tech4 = {"sct-automation-science-pack", "sct-lab-t1"} end
 
 			--Nil all default starter Tech unlocks since we modified each
+			local unlocks = remote.call("SeaBlock", "get_unlocks")
 			for k,v in pairs(unlocks) do
-				remote.call("SeaBlock","set_unlock",k,nil)
+				remote.call("SeaBlock", "set_unlock", k, nil)
 			end
 
 			remote.call("SeaBlock", "set_unlock", "omnite", {"sb-startup1", "landfill"})
-			remote.call("SeaBlock","set_unlock","omnicium-plate", {"sb-startup2"})
-			remote.call("SeaBlock","set_unlock","omnitor", {"sb-startup3"})
-			remote.call("SeaBlock","set_unlock","omnitor-lab", tech4)
+			remote.call("SeaBlock", "set_unlock", "omnicium-plate", {"sb-startup2"})
+			remote.call("SeaBlock", "set_unlock", "omnitor", {"sb-startup3"})
+			remote.call("SeaBlock", "set_unlock", "omnitor-lab", tech4)
 		end
 	end
 end

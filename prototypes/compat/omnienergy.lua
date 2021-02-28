@@ -169,6 +169,8 @@ if mods["omnimatter_energy"] then
             omni.lib.add_unlock_recipe("basic-chemistry","boiler")
         end
 
+        --Move steel from automation (t2) to anbaricity (t1) since its required for SCT t2 labs
+        omni.lib.replace_prerequisite("steel-processing", "automation", "omnitech-anbaricity")
     else
         --Edit Startup 4 to unlock the omnitor lab
         data.raw.technology["sb-startup4"].icon = "__OmniSea__/graphics/technology/omnitor-lab-tech.png"
