@@ -115,17 +115,30 @@ if mods["omnimatter_energy"] then
 
     if mods["ScienceCostTweakerM"] then
         --SCT adds a split Lab+SP tech, edit the lab one to unlock the omnitor lab and move SCT lab stuff to the anbaric lab
-        -- Move lab unlocks to the anbaric lab
-        omni.lib.add_unlock_recipe("omnitech-anbaric-lab", "sct-lab1-construction")
-        omni.lib.add_unlock_recipe("omnitech-anbaric-lab", "sct-lab1-mechanization")
+        --Recreate the anbaric lab tech (doesnt exist with SCT) by deepcopying SCT lab and lock it behind anbaricity
+        TechGen:import("sct-lab-t1"):
+            setName("omnitech-anbaric-lab"):
+            setPrereq("omnitech-anbaricity"):
+            setPacks(1):
+            setCost(55):
+            extend()
+        --Set icon size manually to avoid a crash with current omnilib version. TODO: remove this next version
+        data.raw.technology["omnitech-anbaric-lab"].icon_size = 128
 
-        --Remove them from the starter lab tech:
+        --Remove t1 lab stuff from the starter lab tech:
         omni.lib.remove_unlock_recipe("sct-lab-t1","lab")
         omni.lib.remove_unlock_recipe("sct-lab-t1","sct-lab1-construction")
         omni.lib.remove_unlock_recipe("sct-lab-t1","sct-lab1-mechanization")
+        omni.lib.remove_prerequisite("sct-lab-t1", "omnitech-anbaricity")
 
-        --Add unlock for the omnitor lab
-        --omni.lib.add_unlock_recipe("sct-lab-t1","omnitor-lab")
+        --Set proper icon and name
+        data.raw.technology["sct-lab-t1"].icon = "__OmniSea__/graphics/technology/omnitor-lab-tech.png"
+        data.raw.technology["sct-lab-t1"].icons = nil
+	    data.raw.technology["sct-lab-t1"].localised_name = "Laboratory"
+        data.raw.technology["sct-lab-t1"].localised_description = "Omnitor Labs are the first step of your evolution."
+
+        --Unlock sct lab tech with the omnitor lab
+        data.raw.technology["sct-lab-t1"].unit = {count = 1, ingredients = {{"sb-lab-tool", 1}}, time = 5}
 
         --Add omni-tablet as red sp unlock
         omni.lib.add_unlock_recipe("sct-automation-science-pack","omni-tablet")
@@ -155,21 +168,6 @@ if mods["omnimatter_energy"] then
         else
             omni.lib.add_unlock_recipe("basic-chemistry","boiler")
         end
- 
-        --Copy over icon and localised stuff
-        data.raw.technology["omnitech-anbaric-lab"].icon_size = data.raw.technology["sct-lab-t1"].icon_size
-        data.raw.technology["omnitech-anbaric-lab"].icon = data.raw.technology["sct-lab-t1"].icon
-        data.raw.technology["omnitech-anbaric-lab"].icons = data.raw.technology["sct-lab-t1"].icons
-        data.raw.technology["omnitech-anbaric-lab"].localised_name = data.raw.technology["sct-lab-t1"].localised_name
-        data.raw.technology["omnitech-anbaric-lab"].localised_description = data.raw.technology["sct-lab-t1"].localised_description
-
-        data.raw.technology["sct-lab-t1"].icon = "__OmniSea__/graphics/technology/omnitor-lab-tech.png"
-        data.raw.technology["sct-lab-t1"].icons = nil
-	    data.raw.technology["sct-lab-t1"].localised_name = "Laboratory"
-        data.raw.technology["sct-lab-t1"].localised_description = "Omnitor Labs are the first step of your evolution."
-
-        --Unlock sct lab tech with the omnitor lab aswell
-        data.raw.technology["sct-lab-t1"].unit = {count = 1, ingredients = {{"sb-lab-tool", 1}}, time = 5}
 
     else
         --Edit Startup 4 to unlock the omnitor lab
