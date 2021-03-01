@@ -14,6 +14,9 @@ if mods["omnimatter_energy"] then
     omni.lib.remove_unlock_recipe("sb-startup2","copper-cable")
     omni.lib.add_unlock_recipe("omnitech-anbaricity","copper-cable")
 
+    --Add the normal inserter unlock back to anabric inserter tech... not sure why SB removes it...
+    omni.lib.add_unlock_recipe("omnitech-anbaric-inserter", "inserter")
+
     --Create a new tech for algae farm + simple algae processing behind anbaricity
     omni.lib.remove_unlock_recipe("sb-startup1","algae-farm")
     omni.lib.remove_unlock_recipe("sb-startup1","algae-green-simple")
@@ -34,6 +37,7 @@ if mods["omnimatter_energy"] then
     data.raw.technology["bio-paper-1"].unit.ingredients = {{type = "item", name = "automation-science-pack", amount = 15}}
     data.raw.technology["bio-wood-processing"].unit.ingredients = {{type = "item", name = "automation-science-pack", amount = 15}}
     omni.lib.set_prerequisite("sb-startup3","sb-startup2")
+
     --Put bio-wood-processing-2 behind 1
     omni.lib.replace_prerequisite("bio-wood-processing-2",omni.sea.tech4,"bio-wood-processing")
 
