@@ -1,4 +1,4 @@
-script.on_init(function(event)
+local function modify_starting_items()
 	if remote.interfaces["freeplay"] then
 		local items_to_insert = remote.call("freeplay", "get_created_items")
 		-- local landfill = "landfill"
@@ -23,35 +23,40 @@ script.on_init(function(event)
 		items_to_insert["burner-omniphlog"] = nil
 		remote.call("freeplay", "set_created_items", items_to_insert)
 	end
-end)
-
---Unlock startup1 with Omnite ( and 3+4 if omnimatter_energy is active)
-function checkCraftResultTechs(player,inventory)
-    local inv = player.get_inventory(inventory)
-    if inv.get_item_count("omnite") > 0 then
-    player.force.technologies["sb-startup1"].researched = true
-    end
-	if game.active_mods["omnimatter_energy"] then
-		if inv.get_item_count("omnicium-plate") > 0 then
-        	player.force.technologies["sb-startup2"].researched = true
-        end
-        if inv.get_item_count("omnitor") > 0 then
-        	player.force.technologies["sb-startup3"].researched = true
-        end
-        if inv.get_item_count("omnitor-lab") > 0 then
-            if player.force.technologies["sct-automation-science-pack"] then
-            	player.force.technologies["sct-automation-science-pack"].researched = true
-            else
-            	player.force.technologies["sb-startup4"].researched = true
-			end
-			if player.force.technologies["sct-lab-t1"] then
-				player.force.technologies["sct-lab-t1"].researched = true
-			end
-        end
-    end
 end
 
-script.on_event(defines.events.on_player_main_inventory_changed, function(event)
-  local player = game.players[event.player_index]
-  checkCraftResultTechs(player,defines.inventory.character_main)
-end)
+local function call_remote_interfaces()
+	--Modify Seablocks startup Tech unlocks
+	if remote.interfaces["SeaBlock"] then
+		--local unlocks = remote.call("SeaBlock","get_unlocks")
+		--log(serpent.block(unlocks))
+
+		--First tech unlocks with omnnite now
+		remote.call("SeaBlock", "set_unlock", "angels-ore3-crushed", nil)
+		remote.call("SeaBlock", "set_unlock", "omnite", {"sb-startup1", "landfill"})
+
+		--Omnimatter Energy : complete overhaul
+		if game.active_mods["omnimatter_energy"] then
+			local tech4 = {"sb-startup4"}
+			if game.active_mods["ScienceCostTweakerM"] then tech4 = {"sct-automation-science-pack", "sct-lab-t1"} end
+
+			--Nil all default starter Tech unlocks since we modified each
+			local unlocks = remote.call("SeaBlock", "get_unlocks")
+			for k,v in pairs(unlocks) do
+				remote.call("SeaBlock", "set_unlock", k, nil)
+			end
+
+			remote.call("SeaBlock", "set_unlock", "omnite", {"sb-startup1", "landfill"})
+			remote.call("SeaBlock", "set_unlock", "omnicium-plate", {"sb-startup2"})
+			remote.call("SeaBlock", "set_unlock", "omnitor", {"sb-startup3"})
+			remote.call("SeaBlock", "set_unlock", "omnitor-lab", tech4)
+		end
+	end
+end
+
+local function init()
+	modify_starting_items()
+	call_remote_interfaces()
+end
+
+script.on_init(init)
