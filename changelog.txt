@@ -1,9 +1,14 @@
 ---------------------------------------------------------------------------------------------------
-Version: 4.1.8
-Date: ????
+Version: 4.1.10
+Date: 2021.03.06
   Info:
-    - Update for Seablock 0.5.3
+    - Updated for Seablock 0.5.3
     - Use Seablocks new remote interface to unlock startup techs
+---------------------------------------------------------------------------------------------------
+Version: 4.1.9
+Date: 2021.03.02
+  Bugfixes:
+    - Fixed that inserter and BCB recipe unlocks were missing with the latest SB version
 ---------------------------------------------------------------------------------------------------
 Version: 4.1.7
 Date: 2021.02.28

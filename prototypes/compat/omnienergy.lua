@@ -5,17 +5,17 @@ if mods["omnimatter_energy"] then
     --Plan : instead of saph ore--> algaes-->circuits go for omnite-->omnicium-plates -->omnitors
 
     --Lets first make sure that all recipe unlocks get moved to other techs
-    --Duplicates, just remove:
+    --(need to add them back to energy´s techs since SB removes them)
     omni.lib.remove_unlock_recipe("sb-startup2","basic-circuit-board")
+    omni.lib.add_unlock_recipe("omnitech-anbaricity","basic-circuit-board")
     omni.lib.remove_unlock_recipe("sb-startup3","inserter")
+    omni.lib.add_unlock_recipe("omnitech-anbaric-inserter", "inserter")
     omni.lib.remove_unlock_recipe("sb-startup3","basic-transport-belt")
+    omni.lib.add_unlock_recipe("omnitech-basic-belt-logistics", "basic-transport-belt")
 
     --Move other unlocks somewhere else where it makes sense
     omni.lib.remove_unlock_recipe("sb-startup2","copper-cable")
     omni.lib.add_unlock_recipe("omnitech-anbaricity","copper-cable")
-
-    --Add the normal inserter unlock back to anabric inserter tech... not sure why SB removes it...
-    omni.lib.add_unlock_recipe("omnitech-anbaric-inserter", "inserter")
 
     --Create a new tech for algae farm + simple algae processing behind anbaricity
     omni.lib.remove_unlock_recipe("sb-startup1","algae-farm")
