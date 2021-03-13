@@ -28,8 +28,6 @@ end
 local function call_remote_interfaces()
 	--Modify Seablocks startup Tech unlocks
 	if remote.interfaces["SeaBlock"] then
-		--local unlocks = remote.call("SeaBlock","get_unlocks")
-		--log(serpent.block(unlocks))
 
 		--First tech unlocks with omnnite now
 		remote.call("SeaBlock", "set_unlock", "angels-ore3-crushed", nil)
@@ -59,4 +57,6 @@ local function init()
 	call_remote_interfaces()
 end
 
+
 script.on_init(init)
+script.on_configuration_changed(init)
