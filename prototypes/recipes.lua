@@ -3,14 +3,11 @@
 ---------------
 
 --Hypomnic Water + Research
-local get_hypomnic_req=function(lvl)
+local function get_hypomnic_req(lvl)
     local req = {}
     req[#req+1]="omnitech-omnic-acid-hydrolyzation-"..lvl
     if (lvl-1)%omni.fluid_levels_per_tier == 0 then
         req[#req+1]="omnitech-omnitractor-electric-"..((lvl-1)/omni.fluid_levels_per_tier+1)
-        if lvl > 1 and omni.fluid_dependency < omni.fluid_levels_per_tier then
-            req[#req+1]="omnitech-omnisolvent-omnisludge-"..(lvl-1)
-        end
     else
         req[#req+1]="omnitech-omnisolvent-omnisludge-"..(lvl-1)
     end
