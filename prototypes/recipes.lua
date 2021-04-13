@@ -145,20 +145,20 @@ RecGen:create("OmniSea","crystallizing-to-omnite-2"):
 --Omniplant--
 -------------
 RecGen:create("OmniSea","lithomnic-water-enrichment"):
-	setIngredients({type="fluid",name="hypomnic-water",amount=135}, {type="fluid",name="hydrosalinic-water",amount=50}):
+	setIngredients({type="fluid",name="hypomnic-water",amount=108}, {type="fluid",name="hydrosalinic-water",amount=40}):
 	setIcons("lithomnic-water"):
-	setResults({type="fluid",name="lithomnic-water",amount=54},{type="fluid",name="petromnic-waste-water",amount=134}):
-	setEnergy(3.0):
+	setResults({type="fluid",name="lithomnic-water",amount=72},{type="fluid",name="petromnic-waste-water",amount=102}):
+	setEnergy(2.0):
 	setCategory("omniplant"):
 	setSubgroup("omnisea-fluids"):
 	setTechName("omnitech-hypomnic-water-omnitraction-1"):
 	extend()
 
 RecGen:create("OmniSea","hydrosalinic-water-enrichment"):
-	setIngredients({type="fluid",name="hydromnic-acid",amount=125}, {type="fluid",name="water-saline",amount=75}, {type="item",name="stone-crushed",amount=4}):
+	setIngredients({type="fluid",name="hydromnic-acid",amount=125}, {type="fluid",name="water-saline",amount=35}, {type="item",name="stone-crushed",amount=4}):
 	setIcons("hydrosalinic-water"):
 	setResults({type="fluid",name="hydrosalinic-water",amount=200}):
-	setEnergy(3.0):
+	setEnergy(4.0):
 	setCategory("omniplant"):
 	setSubgroup("omnisea-fluids"):
 	setTechName("omnitech-hypomnic-water-omnitraction-1"):

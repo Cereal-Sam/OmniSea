@@ -8,6 +8,9 @@ omni.lib.remove_unlock_recipe("water-washing-1", "seafloor-pump")
 data.raw.recipe["initial-omnitraction-angels-ore1"].category = "omnite-extraction-both"
 data.raw.recipe["initial-omnitraction-angels-ore3"].category = "omnite-extraction-both"
 
+--Nerf omnic waste creation (from 300 to 200) to avoid cheaty omnite creation
+omni.lib.set_recipe_results("pulver-omnic-waste",{type = "fluid", name = "omnic-waste", amount = 200})
+
 --Edit startup tech
 -- Startup 1
 data.raw.tool["sb-angelsore3-tool"].icon = "__omnimatter__/graphics/icons/omnite.png"
@@ -114,7 +117,7 @@ for _, pipes in pairs(data.raw.item) do
 	local drillrec = RecGen:create("OmniSea","omnic-water-fracking-".. pipes.name):
 		setIngredients({type="fluid",name="coromnic-vapour",amount=100}, {type="item",name= pipes.name,amount=1}):
 		setIcons("omnic-water"):
-		addSmallIcon(pipes.icon or pipes.icons, 3):
+		addSmallIcon(omni.lib.icon.of(pipes, true), 3):
 		setResults({type="fluid",name="omnic-water",amount=(baseout + bonus)}):
 		setEnergy(4.0):
 		setCategory("omnidrilling"):

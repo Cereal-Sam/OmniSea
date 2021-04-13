@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 4.1.13
+Date: 2021.04.13
+  Changes:
+    - Changed the amount of omnic waste from pulverised Stone/Omnite from 300 to 200
+    -   -(no more cheaty Omnite :))
+    - Adjusted lithomnic water enrichment values: total crafting speed doubled,
+    -   -less petromnic waste, less hypomnic water required
+    - Bumped the crafting time of Hydrosalinic water enrichement from 3 to 4 seconds,
+    -   - 35 instead of 75 saline water required
+  Bugfixes:
+    - Fixed that the iron pipe icon was scaled wrong on the omnmic water drilling recipe
+---------------------------------------------------------------------------------------------------
 Version: 4.1.12
 Date: 2021.04.05
   Bugfixes:
