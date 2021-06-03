@@ -1,4 +1,4 @@
-require("prototypes.compat.omnienergy")
+require("prototypes.compat.omnimatter_energy.data-final-fixes")
 
 --Move the Basic Extraction (and water-omnitraction)research behind the tutorial ones
 omni.lib.add_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
