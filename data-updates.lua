@@ -37,20 +37,28 @@ omni.lib.enable_recipe("omnic-water-condensation")
 
 --Omniwood compat: Add an early low-yield omnialgae recipe and fix the fuel value of wood
 if mods["omnimatter_wood"] then 
-	RecGen:create("OmniSea","omnialgae-processing-0"):
-	setIngredients({type="fluid",name="water-purified",amount=100}, {type="item",name="omnite",amount=40}):
-	setIcons("omnialgae","omnimatter_wood"):
-	setResults({type="item",name="omnialgae",amount=40}):
-	setEnergy(20.0):
-	setCategory("bio-processing"):
-	setSubgroup("omnisea-fluids"):
-	setEnabled(true):
-	extend()
-	
-	data.raw.item["wood"].fuel_value = "6MJ"
-	data.raw.item["omniwood"].fuel_value = "1MJ"
+    RecGen:create("OmniSea","omnialgae-processing-0"):
+        setIngredients({type="fluid",name="water-purified",amount=100}, {type="item",name="omnite",amount=40}):
+        setIcons("omnialgae","omnimatter_wood"):
+        setResults({type="item",name="omnialgae",amount=40}):
+        setEnergy(20.0):
+        setCategory("bio-processing"):
+        setSubgroup("omnisea-fluids"):
+        setEnabled(true):
+        extend()
+    
+    --Move brown algae recipe to sb startup:
+    RecGen:import("algae-green-simple"):
+        setTechName("sb-startup-1"):
+        setEnabled(false):
+        setHidden(false):
+        addIngredients("omnialgae",40):
+        extend()
 
-	--TechGen:importIf("omniwaste"):removeUnlocks("wasteMutation"):extend()
+    data.raw.item["wood"].fuel_value = "6MJ"
+    data.raw.item["omniwood"].fuel_value = "1MJ"
+
+    --TechGen:importIf("omniwaste"):removeUnlocks("wasteMutation"):extend()
 end
 
 local startuptechs = {
@@ -80,106 +88,106 @@ local startuptechs = {
 }
 
 for _,tech in pairs(data.raw.technology) do
-	if startuptechs[tech.name] and omni.lib.is_in_table("slag-processing-1",tech.prerequisites) then
-		omni.lib.replace_prerequisite(tech.name,"slag-processing-1", omni.sea.tech4)
-	end
+    if startuptechs[tech.name] and omni.lib.is_in_table("slag-processing-1",tech.prerequisites) then
+        omni.lib.replace_prerequisite(tech.name,"slag-processing-1", omni.sea.tech4)
+    end
 end
 
 -- Add Omnidrill recipes for all pipes
 for _, pipes in pairs(data.raw.item) do
-	if pipes.subgroup == "pipe" then
-		if pipes.name == "stone-pipe" then tier = 1
-		elseif pipes.name == "pipe" or pipes.name == "copper-pipe" 
-			then tier = 2 techreq =	{"omnitech-omnidrill-1"}		-- +40%
-		elseif pipes.name == "steel-pipe" or pipes.name == "plastic-pipe" or pipes.name == "bronze-pipe" 
-			then tier = 3 techreq =	{"omnitech-omnidrill-2"}		-- +15%
-		elseif pipes.name == "brass-pipe" or pipes.name == "ceramic-pipe" 
-			then tier = 4 techreq =	{"omnitech-omnidrill-3"}		-- +15%
-		elseif pipes.name == "titanium-pipe" 
-			then tier = 5 techreq =	{"omnitech-drilling-equipment-brass-pipe","omnitech-drilling-equipment-ceramic-pipe"}		-- +15%
-		elseif pipes.name == "tungsten-pipe" or pipes.name == "nitinol-pipe" 
-			then tier = 6 techreq =	{"omnitech-drilling-equipment-titanium-pipe"} -- +15%
-		elseif pipes.name == "copper-tungsten-pipe"
-			then tier = 7 techreq =	{"omnitech-drilling-equipment-tungsten-pipe","omnitech-drilling-equipment-nitinol-pipe"} -- +15%
-		else tier = 1
-		end
-		
-		baseout = 512		
-		if tier == 1 then 
-			bonus = 0
-		else 
-			bonus = math.floor((baseout*0.4) + ((tier-2)*(baseout*0.15)) )
-		end
+    if pipes.subgroup == "pipe" then
+        if pipes.name == "stone-pipe" then tier = 1
+        elseif pipes.name == "pipe" or pipes.name == "copper-pipe" 
+            then tier = 2 techreq =	{"omnitech-omnidrill-1"}		-- +40%
+        elseif pipes.name == "steel-pipe" or pipes.name == "plastic-pipe" or pipes.name == "bronze-pipe" 
+            then tier = 3 techreq =	{"omnitech-omnidrill-2"}		-- +15%
+        elseif pipes.name == "brass-pipe" or pipes.name == "ceramic-pipe" 
+            then tier = 4 techreq =	{"omnitech-omnidrill-3"}		-- +15%
+        elseif pipes.name == "titanium-pipe" 
+            then tier = 5 techreq =	{"omnitech-drilling-equipment-brass-pipe","omnitech-drilling-equipment-ceramic-pipe"}		-- +15%
+        elseif pipes.name == "tungsten-pipe" or pipes.name == "nitinol-pipe" 
+            then tier = 6 techreq =	{"omnitech-drilling-equipment-titanium-pipe"} -- +15%
+        elseif pipes.name == "copper-tungsten-pipe"
+            then tier = 7 techreq =	{"omnitech-drilling-equipment-tungsten-pipe","omnitech-drilling-equipment-nitinol-pipe"} -- +15%
+        else tier = 1
+        end
+        
+        baseout = 512		
+        if tier == 1 then 
+            bonus = 0
+        else 
+            bonus = math.floor((baseout*0.4) + ((tier-2)*(baseout*0.15)) )
+        end
 
-		local metal,check = string.gsub(pipes.name,"-pipe","")
-		if check == 0 then metal = "iron" end
-		
-	local drillrec = RecGen:create("OmniSea","omnic-water-fracking-".. pipes.name):
-		setIngredients({type="fluid",name="coromnic-vapour",amount=100}, {type="item",name= pipes.name,amount=1}):
-		setIcons("omnic-water"):
-		addSmallIcon(omni.lib.icon.of(pipes, true), 3):
-		setResults({type="fluid",name="omnic-water",amount=(baseout + bonus)}):
-		setEnergy(4.0):
-		setCategory("omnidrilling"):
-		setSubgroup("omnisea-fluid-generation"):
-		setOrder(tier.."-"..pipes.order)
-		if tier == 1 then
-			drillrec:setTechName("omnitech-omnidrill-1")
-		else
-			drillrec:setTechName("omnitech-drilling-equipment-"..pipes.name):
-			setTechPacks(2+math.floor(tier/2)):
-			setTechCost(25+math.floor((tier/2)*25)):
-			setTechTime(15):
-			setTechIcons("tech-"..pipes.name,"OmniSea"):
-			setTechLocName("omnitech-drilling-equipment",{"material-name."..metal})
-		end
-		drillrec:setTechPrereq(techreq)
-		drillrec:extend()
-	end
+        local metal,check = string.gsub(pipes.name,"-pipe","")
+        if check == 0 then metal = "iron" end
+        
+    local drillrec = RecGen:create("OmniSea","omnic-water-fracking-".. pipes.name):
+        setIngredients({type="fluid",name="coromnic-vapour",amount=100}, {type="item",name= pipes.name,amount=1}):
+        setIcons("omnic-water"):
+        addSmallIcon(omni.lib.icon.of(pipes, true), 3):
+        setResults({type="fluid",name="omnic-water",amount=(baseout + bonus)}):
+        setEnergy(4.0):
+        setCategory("omnidrilling"):
+        setSubgroup("omnisea-fluid-generation"):
+        setOrder(tier.."-"..pipes.order)
+        if tier == 1 then
+            drillrec:setTechName("omnitech-omnidrill-1")
+        else
+            drillrec:setTechName("omnitech-drilling-equipment-"..pipes.name):
+            setTechPacks(2+math.floor(tier/2)):
+            setTechCost(25+math.floor((tier/2)*25)):
+            setTechTime(15):
+            setTechIcons("tech-"..pipes.name,"OmniSea"):
+            setTechLocName("omnitech-drilling-equipment",{"material-name."..metal})
+        end
+        drillrec:setTechPrereq(techreq)
+        drillrec:extend()
+    end
 end
 --[[
-		baseout = 512		
-		if tier == 1 then 
-			bonus = 0
-			techname = "omnidrill-1"
-			techpacks = nil
-			techcost = nil
-			techtime = nil
-			techicon = nil
-		else 
-			bonus = math.floor((baseout*0.4) + ((tier-2)*(baseout*0.15)))
-			techname = "drilling-equipment-"..tier
-			techpacks = 2+math.floor(tier/2)
-			techcost = (25+math.floor((tier/2)*25
-			techtime = 15
-			techicon = "Omnimatter","omnic-water"
-		end
+        baseout = 512		
+        if tier == 1 then 
+            bonus = 0
+            techname = "omnidrill-1"
+            techpacks = nil
+            techcost = nil
+            techtime = nil
+            techicon = nil
+        else 
+            bonus = math.floor((baseout*0.4) + ((tier-2)*(baseout*0.15)))
+            techname = "drilling-equipment-"..tier
+            techpacks = 2+math.floor(tier/2)
+            techcost = (25+math.floor((tier/2)*25
+            techtime = 15
+            techicon = "Omnimatter","omnic-water"
+        end
 --]]
 ----log(serpent.block(data.raw.recipe))
 
 -- Add Omnicompressor Recipes
 for i, rec in pairs(data.raw.recipe) do		
-	if rec.category == "angels-chemical-void" and string.find(rec.name,"gas") then
-	data:extend({
-	{
-		type = "recipe",
-		name = "omnisea-void-"..rec.name,
-		category = "omnisea-chemical-void",
-		enabled = "false",
-		energy_required = 1,
-		ingredients = rec.ingredients, --100
-		results=
-		{
-			{type="fluid", name= "coromnic-vapour", amount=50},
-		},
-		subgroup = "omnisea-void",
-		icon = rec.icon,
-		icon_size = 32,
-		order = "omnisea-void-"..rec.name
-	}
-	})
-	omni.lib.add_unlock_recipe("omnitech-omnidrill-1", "omnisea-void-"..rec.name)
-	end
+    if rec.category == "angels-chemical-void" and string.find(rec.name,"gas") then
+    data:extend({
+    {
+        type = "recipe",
+        name = "omnisea-void-"..rec.name,
+        category = "omnisea-chemical-void",
+        enabled = "false",
+        energy_required = 1,
+        ingredients = rec.ingredients, --100
+        results=
+        {
+            {type="fluid", name= "coromnic-vapour", amount=50},
+        },
+        subgroup = "omnisea-void",
+        icon = rec.icon,
+        icon_size = 32,
+        order = "omnisea-void-"..rec.name
+    }
+    })
+    omni.lib.add_unlock_recipe("omnitech-omnidrill-1", "omnisea-void-"..rec.name)
+    end
 end
 
 --Late update require
