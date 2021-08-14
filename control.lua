@@ -46,8 +46,15 @@ local function call_remote_interfaces()
 
 			remote.call("SeaBlock", "set_unlock", "omnite", {"sb-startup1", "landfill"})
 			remote.call("SeaBlock", "set_unlock", "omnicium-plate", {"sb-startup2"})
-			remote.call("SeaBlock", "set_unlock", "omnitor", {"sb-startup3"})
-			remote.call("SeaBlock", "set_unlock", "omnitor-lab", tech4)
+			
+
+			if game.active_mods["ScienceCostTweakerM"] then
+				remote.call("SeaBlock", "set_unlock", "omnitor", {"sb-startup3", "omnitech-anbaric-lab"})
+				remote.call("SeaBlock", "set_unlock", "omnitor-lab", {"energy-science-pack"})
+			else
+				remote.call("SeaBlock", "set_unlock", "omnitor", {"sb-startup3"})
+				remote.call("SeaBlock", "set_unlock", "omnitor-lab", tech4)
+			end
 		end
 	end
 end

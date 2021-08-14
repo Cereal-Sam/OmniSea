@@ -3,9 +3,11 @@ if not omni then omni = {} end
 if not omni.sea then omni.sea = {} end
 
 if data.raw.technology["sct-automation-science-pack"] then
-     omni.sea.tech4 = "sct-automation-science-pack"
+    omni.sea.tech4 = "sct-automation-science-pack"
+    omni.sea.autosp = "sct-automation-science-pack"
 else
     omni.sea.tech4 = "sb-startup4"
+    omni.sea.autosp = "automation-science-pack"
 end
 
 require("prototypes.buildings")

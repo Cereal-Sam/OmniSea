@@ -14,9 +14,11 @@ omni.lib.set_recipe_results("pulver-omnic-waste",{type = "fluid", name = "omnic-
 --Edit startup tech
 -- Startup 1
 data.raw.tool["sb-angelsore3-tool"].icon = "__omnimatter__/graphics/icons/omnite.png"
+data.raw.tool["sb-angelsore3-tool"].icon_size = 64
 data.raw.tool["sb-angelsore3-tool"].localised_name = {"item-name.omnite"}
 data.raw.tool["sb-angelsore3-tool"].localised_description = "Get Omnite to complete this research."
-data.raw.technology["sb-startup1"].icon = "__OmniSea__/graphics/technology/omnite-tech.png"
+data.raw.technology["sb-startup1"].icon = "__omnimatter__/graphics/icons/omnite.png"
+data.raw.technology["sb-startup1"].icon_size = 64
 data.raw.technology["sb-startup1"].localised_name = "Getting Omnite"
 data.raw.technology["sb-startup1"].localised_description = "Use an omnidensator to condensate omnic water out of the air. You can condense omnic waste out of omnic water which you can turn into omnite at a low yield."
 
@@ -28,12 +30,6 @@ omni.lib.remove_unlock_recipe(omni.sea.tech4 , "omnic-water-condensation")
 omni.lib.remove_unlock_recipe(omni.sea.tech4 , "omnidensator-1")
 omni.lib.enable_recipe("omnidensator-1")
 omni.lib.enable_recipe("omnic-water-condensation")
-
--- --Omniwater/Omniwood compat:Avoid Research cycle
--- if data.raw.technology["omniwaste"] then
---     data.raw.technology["omniwaste"].prerequisites = nil 
---     data.raw.technology["omniwaste"].prerequisites = {omni.sea.tech4}  
--- end
 
 --Omniwood compat: Add an early low-yield omnialgae recipe and fix the fuel value of wood
 if mods["omnimatter_wood"] then 
@@ -62,29 +58,30 @@ if mods["omnimatter_wood"] then
 end
 
 local startuptechs = {
-  ['automation'] = true,
-  ['logistics'] = true,
-  ['optics'] = true,
-  ['turrets'] = true,
-  ['stone-walls'] = true,
-  ['basic-chemistry'] = true,
-  ['ore-crushing'] = true,
-  ['steel-processing'] = true,
-  ['military'] = true,
-  ['angels-sulfur-processing-1'] = true,
-  ['water-treatment'] = true,
-  ['water-washing-1'] = true,
-  ['slag-processing-1'] = true,
-  ['angels-fluid-control'] = true,
-  ['angels-metallurgy-1'] = true,
-  ['angels-iron-smelting-1'] = true,
-  ['angels-copper-smelting-1'] = true,
-  ['angels-coal-processing'] = true,
-  ['bio-wood-processing-2'] = true,
-  ['omnitech-basic-omnitraction'] = true,
-  ['basic-automation'] = true,
-  ['omnitech-simple-automation'] = true,
-  ['landfill'] = true
+    ['automation'] = true,
+    ['logistics'] = true,
+    ['optics'] = true,
+    ['turrets'] = true,
+    ['stone-walls'] = true,
+    ['basic-chemistry'] = true,
+    ['ore-crushing'] = true,
+    ['steel-processing'] = true,
+    ['military'] = true,
+    ['angels-sulfur-processing-1'] = true,
+    ['water-treatment'] = true,
+    ['water-washing-1'] = true,
+    ['slag-processing-1'] = true,
+    ['angels-fluid-control'] = true,
+    ['angels-metallurgy-1'] = true,
+    ['angels-iron-smelting-1'] = true,
+    ['angels-copper-smelting-1'] = true,
+    ['angels-coal-processing'] = true,
+    ['bio-wood-processing-2'] = true,
+    ['omnitech-basic-omnitraction'] = true,
+    ['basic-automation'] = true,
+    ['omnitech-simple-automation'] = true,
+    ['omnitech-base-impure-extraction'] = true,
+    ['landfill'] = true
 }
 
 for _,tech in pairs(data.raw.technology) do
