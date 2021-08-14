@@ -138,9 +138,13 @@ if mods["omnimatter_energy"] then
     data.raw.technology["bio-wood-processing"].unit.count = 15
     omni.lib.set_prerequisite("sb-startup3", "sb-startup2")
 
-    --Add autosp to bio-wood-processing-2 and steam power
+    --Add auto SP to new SB techs that miss it
     omni.lib.add_science_pack("bio-wood-processing-2", "automation-science-pack")
     omni.lib.add_science_pack("omnitech-steam-power", "automation-science-pack")
+    omni.lib.add_science_pack("basic-chemistry", "automation-science-pack")
+    omni.lib.add_science_pack("angels-sulfur-processing-1", "automation-science-pack")
+    omni.lib.add_science_pack("slag-processing-1", "automation-science-pack")
+    omni.lib.add_science_pack("water-washing-1", "automation-science-pack")
 
     --Add an omni tablet to the paper wooden board recipe
     omni.lib.add_recipe_ingredient("wooden-board-paper", "omni-tablet")
@@ -148,6 +152,7 @@ if mods["omnimatter_energy"] then
     --Random tech fixes
     omni.lib.add_prerequisite(omni.lib.get_tech_name("yellow-filter-inserter"), "omnitech-burner-filter")
     omni.lib.remove_prerequisite("logistics", "logistics-0")
+    omni.lib.add_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
 
     ---------------
     ---SCT FIXES---
@@ -158,6 +163,7 @@ if mods["omnimatter_energy"] then
         --Copy
         TechGen:import("sct-lab-t1"):
             setName("omnitech-anbaric-lab"):
+            setUpgrade(false):
             setPrereq("sb-startup3"):
             nullUnlocks():
             addUnlocks("omnitor-lab"):
@@ -165,9 +171,10 @@ if mods["omnimatter_energy"] then
             extend()
         data.raw.technology["omnitech-anbaric-lab"].localised_name = "Laboratory"
         data.raw.technology["omnitech-anbaric-lab"].localised_description = "Omnitor Labs are the first step of your evolution."
-        data.raw.technology["sct-lab-t1"].unit.ingredients = nil
+
         --Now set parameters for the old tech
         TechGen:import("sct-lab-t1"):
+            setUpgrade(false):
             setPrereq("omnitech-anbaric-electronics"):
             setPacks({{"energy-science-pack", 1}}):
             setCost(45):
@@ -176,13 +183,15 @@ if mods["omnimatter_energy"] then
         --Copy
         TechGen:import("sct-automation-science-pack"):
             setName("energy-science-pack"):
+            setUpgrade(false):
             setPrereq("omnitech-anbaric-lab"):
             removeUnlocks("omnitor-lab", "automation-science-pack", "sct-t1-ironcore", "sct-t1-magnet-coils"):
             setIcons(omni.lib.icon.of("energy-science-pack", "item")):
             extend()
-        data.raw.technology["sct-automation-science-pack"].unit.ingredients = nil
+
         --Now set parameters for the old tech
         TechGen:import("sct-automation-science-pack"):
+            setUpgrade(false):
             setPrereq("sct-lab-t1"):
             nullUnlocks():
             addUnlocks("sct-automation-science-pack"):
@@ -190,21 +199,25 @@ if mods["omnimatter_energy"] then
             setCost(45):
             extend()
 
-        -- --Remove t1 lab stuff from the starter lab tech:
-        -- omni.lib.remove_unlock_recipe("sct-lab-t1","lab")
-        -- omni.lib.remove_unlock_recipe("sct-lab-t1","sct-lab1-construction")
-        -- omni.lib.remove_unlock_recipe("sct-lab-t1","sct-lab1-mechanization")
-        -- omni.lib.remove_prerequisite("sct-lab-t1", "omnitech-anbaricity")
-
-
-
         ----Unlock sct lab tech with the omnitor lab
         data.raw.technology["energy-science-pack"].unit = {count = 1, ingredients = {{"sb-lab-tool", 1}}, time = 5}
 
+        --Move some thing sbehind autosp again
+        omni.lib.add_prerequisite("ore-crushing", omni.sea.autosp)
+        omni.lib.add_prerequisite("omnitech-steam-power", omni.sea.autosp)
 
-        ----Add anbaric lab as prereq for T2 lab
-        --omni.lib.add_prerequisite("sct-lab-t2", "omnitech-anbaric-lab")
+        --Move some stuff that SCT messes up back to energy sp
+        omni.lib.replace_prerequisite("omnitech-simple-automation", "sct-automation-science-pack", "energy-science-pack")
 
+        omni.lib.remove_prerequisite("omnitech-base-impure-extraction", omni.sea.autosp)
+        omni.lib.remove_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
+        omni.lib.add_prerequisite("omnitech-base-impure-extraction", "energy-science-pack")
 
+        --Add energy SP to new SB techs that miss it
+        omni.lib.add_science_pack("bio-wood-processing-2", "energy-science-pack")
+        omni.lib.add_science_pack("basic-chemistry", "energy-science-pack")
+        omni.lib.add_science_pack("angels-sulfur-processing-1", "energy-science-pack")
+        omni.lib.add_science_pack("slag-processing-1", "energy-science-pack")
+        omni.lib.add_science_pack("water-washing-1", "energy-science-pack")
     end
 end

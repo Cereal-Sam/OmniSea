@@ -31,6 +31,9 @@ omni.lib.remove_unlock_recipe(omni.sea.tech4 , "omnidensator-1")
 omni.lib.enable_recipe("omnidensator-1")
 omni.lib.enable_recipe("omnic-water-condensation")
 
+--Move the Basic Extraction (and water-omnitraction)research behind the tutorial ones
+omni.lib.add_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
+
 --Omniwood compat: Add an early low-yield omnialgae recipe and fix the fuel value of wood
 if mods["omnimatter_wood"] then 
     RecGen:create("OmniSea","omnialgae-processing-0"):

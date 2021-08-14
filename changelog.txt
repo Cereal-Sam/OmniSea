@@ -1,8 +1,10 @@
 ---------------------------------------------------------------------------------------------------
 Version: 4.1.15
-Date: 2021.07.XX
+Date: 2021.08.14
+  Changes:
+    - Compat rewrite for the new versions of energy and Seablock
   Bugfixes:
-    - Fixed getting stuck with current versions of SB and omniwod due to a missing algae recipe
+    - Fixed getting stuck with current versions of SB and omniwood due to a missing algae recipe
 ---------------------------------------------------------------------------------------------------
 Version: 4.1.14
 Date: 2021.06.03

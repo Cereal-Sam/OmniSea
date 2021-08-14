@@ -1,8 +1,5 @@
 require("prototypes.compat.omnimatter_energy.data-final-fixes")
 
---Move the Basic Extraction (and water-omnitraction)research behind the tutorial ones
-omni.lib.add_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
-
 --Disable Mineralized-Water crystallization
 RecGen:import("sb-water-mineralized-crystallization"):
 	setEnabled(false):
@@ -21,5 +18,4 @@ if not mods["omnimatter_energy"] then
 		data.raw.item[entity].fuel_category = nil
 		data.raw.item[entity].fuel_value = nil
 	end
-	
 end
