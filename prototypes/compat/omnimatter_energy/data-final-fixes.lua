@@ -1,5 +1,4 @@
 if mods["omnimatter_energy"] then
-
     --Disable ks power & bobs burner gens
     omni.lib.remove_unlock_recipe(omni.sea.tech4, "burner-generator")
     omni.lib.remove_unlock_recipe(omni.sea.tech4, "bob-burner-generator")

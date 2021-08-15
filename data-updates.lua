@@ -16,11 +16,11 @@ omni.lib.set_recipe_results("pulver-omnic-waste",{type = "fluid", name = "omnic-
 data.raw.tool["sb-angelsore3-tool"].icon = "__omnimatter__/graphics/icons/omnite.png"
 data.raw.tool["sb-angelsore3-tool"].icon_size = 64
 data.raw.tool["sb-angelsore3-tool"].localised_name = {"item-name.omnite"}
-data.raw.tool["sb-angelsore3-tool"].localised_description = "Get Omnite to complete this research."
+data.raw.tool["sb-angelsore3-tool"].localised_description = {"tool-description.omnite"}
 data.raw.technology["sb-startup1"].icon = "__omnimatter__/graphics/icons/omnite.png"
 data.raw.technology["sb-startup1"].icon_size = 64
-data.raw.technology["sb-startup1"].localised_name = "Getting Omnite"
-data.raw.technology["sb-startup1"].localised_description = "Use an omnidensator to condensate omnic water out of the air. You can condense omnic waste out of omnic water which you can turn into omnite at a low yield."
+data.raw.technology["sb-startup1"].localised_name = {"technology-name.getting_omnite"}
+data.raw.technology["sb-startup1"].localised_description = {"technology-description.getting_omnite"}
 
 --Add Slag Processing 2 as prereq. for Hypomnic Water Omnitraction
 omni.lib.add_prerequisite("omnitech-hypomnic-water-omnitraction-1", "slag-processing-2")

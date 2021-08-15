@@ -34,33 +34,33 @@ if mods["omnimatter_energy"] then
     data.raw.tool["sb-algae-brown-tool"].icon_size = nil
     data.raw.tool["sb-algae-brown-tool"].icons = data.raw.item["omnicium-plate"].icons
     data.raw.tool["sb-algae-brown-tool"].localised_name = {"item-name.omnicium-plate"}
-    data.raw.tool["sb-algae-brown-tool"].localised_description = "Get an Omnicium plate to complete this research."
+    data.raw.tool["sb-algae-brown-tool"].localised_description = {"tool-description.omnicium"}
     data.raw.technology["sb-startup2"].icon = nil
     data.raw.technology["sb-startup2"].icon_size = nil
     data.raw.technology["sb-startup2"].icons = data.raw.item["omnicium-plate"].icons
-    data.raw.technology["sb-startup2"].localised_name = "Omnicium plate"
-    data.raw.technology["sb-startup2"].localised_description = "Omnicium plates are the key material for progression in Omnimatter. Get them either by smelting crushed Omnite (lower yield) or Omnite together with Saphirite and Stiratite in an Omni furnace"
+    data.raw.technology["sb-startup2"].localised_name = {"technology-name.getting_omnicium"}
+    data.raw.technology["sb-startup2"].localised_description = {"technology-description.getting_omnicium"}
 
     --Edit startup 3 -->omnitor
     data.raw.tool["sb-basic-circuit-board-tool"].icon = nil
     data.raw.tool["sb-basic-circuit-board-tool"].icon_size = nil
     data.raw.tool["sb-basic-circuit-board-tool"].icons = data.raw.item["omnitor"].icons
     data.raw.tool["sb-basic-circuit-board-tool"].localised_name = {"item-name.omnitor"}
-    data.raw.tool["sb-basic-circuit-board-tool"].localised_description = "Get an Omnitor to complete this research."
+    data.raw.tool["sb-basic-circuit-board-tool"].localised_description = {"tool-description.omnitor"}
     data.raw.technology["sb-startup3"].icon = nil
     data.raw.technology["sb-startup3"].icon_size = nil
     data.raw.technology["sb-startup3"].icons = data.raw.item["omnitor"].icons
-    data.raw.technology["sb-startup3"].localised_name = "Omnitor"
-    data.raw.technology["sb-startup3"].localised_description = "Omnitors are the source for basic automation."
+    data.raw.technology["sb-startup3"].localised_name = {"technology-name.getting_omnitor"}
+    data.raw.technology["sb-startup3"].localised_description = {"technology-description.getting_omnitor"}
 
     --Edit startup 4 -->lab, unlocks energy sp
     data.raw.tool["sb-lab-tool"].icon = "__omnimatter_energy__/graphics/icons/omnitor-lab.png"
     data.raw.tool["sb-lab-tool"].icon_size = 32
     data.raw.tool["sb-lab-tool"].localised_name = {"entity-name.omnitor-lab"}
-    data.raw.tool["sb-lab-tool"].localised_description = "Get an Omnitor Lab to complete this research."
+    data.raw.tool["sb-lab-tool"].localised_description = {"tool-description.omnitor_lab"}
     data.raw.technology["sb-startup4"].icon = "__OmniSea__/graphics/technology/omnitor-lab-tech.png"
-    data.raw.technology["sb-startup4"].localised_name = "Laboratory"
-    data.raw.technology["sb-startup4"].localised_description = "Omnitor Labs are the first step of your evolution."
+    data.raw.technology["sb-startup4"].localised_name = {"technology-name.getting_omnitor_lab"}
+    data.raw.technology["sb-startup4"].localised_description = {"technology-description.getting_omnitor_lab"}
 
 
     -------------------------------
@@ -169,8 +169,8 @@ if mods["omnimatter_energy"] then
             addUnlocks("omnitor-lab"):
             setIcons(omni.lib.icon.of("omnitor-lab","item")):
             extend()
-        data.raw.technology["omnitech-anbaric-lab"].localised_name = "Laboratory"
-        data.raw.technology["omnitech-anbaric-lab"].localised_description = "Omnitor Labs are the first step of your evolution."
+        data.raw.technology["omnitech-anbaric-lab"].localised_name = {"technology-name.getting_omnitor_lab"}
+        data.raw.technology["omnitech-anbaric-lab"].localised_description = {"technology-description.getting_omnitor_lab"}
 
         --Now set parameters for the old tech
         TechGen:import("sct-lab-t1"):
