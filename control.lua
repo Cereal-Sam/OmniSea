@@ -1,27 +1,34 @@
 local function modify_starting_items()
-    --nil character starting items
+    --Update character items (Mainly entities)
     if remote.interfaces["freeplay"] then
+        local items_to_insert = remote.call("freeplay", "get_created_items")
+        items_to_insert["omnidensator-1"] = (items_to_insert["omnidensator-1"] or 0) + 1
+		items_to_insert["burner-omni-furnace"] = (items_to_insert["burner-omni-furnace"] or 0) + 1
+		items_to_insert["crystallizer"] = (items_to_insert["crystallizer"] or 0) + 1
+        --Start with 2 electric omnitractors to avoid unneeded handcrafting cellulose for fuel
+        items_to_insert["omnitractor-1"] = 2
+		--Start with 1 clarifier for the initial setup
+		items_to_insert["clarifier"] = 1
+		items_to_insert["omniphlog-1"] = 1
+        --Nil the burner stuff
+		items_to_insert["burner-mining-drill"] = nil
+		items_to_insert["burner-omniphlog"] = nil
+        items_to_insert["burner-omnitractor"] = nil
+		remote.call("freeplay", "set_created_items", items_to_insert)
+
         remote.call("freeplay", "set_created_items", {})
     end
 
+    --Add non entity starter items into Seablocks rocj chest
     local starter_items = {
-        ["omnidensator-1"] = 1,
-        ["burner-omni-furnace"] = 1,
-        ["crystallizer"] = 1,
         ["wood-pellets"] = 50,
         ["landfill"] = 200,
-        ["omnitractor-1"] = 2,
-        ["clarifier"] = 1,
-        ["omniphlog-1"] = 1
     }
     if game.active_mods["LandfillPainting"] then starter_items["landfill-sand-3"] = starter_items["landfill"] starter_items["landfill"] = nil end
     if game.active_mods["omnimatter_energy"] then starter_items["purified-omnite"] = starter_items["wood-pellets"] starter_items["wood-pellets"] = nil end
     if game.active_mods["omnimatter_wood"] then starter_items["omniwood"] = 20 end
 
     local remove_items = {
-        "burner-mining-drill",
-        "burner-omnitractor",
-        "burner-omniphlog"
     }
 
     if remote.interfaces["SeaBlock"] then

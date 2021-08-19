@@ -205,8 +205,6 @@ if mods["omnimatter_energy"] then
             setCost(45):
             extend()
 
-        
-
         ----Unlock sct lab tech with the omnitor lab
         data.raw.technology["energy-science-pack"].unit = {count = 1, ingredients = {{"sb-lab-tool", 1}}, time = 5}
 
