@@ -80,6 +80,8 @@ if mods["omnimatter_energy"] then
     --Add omni-tablet as red sp unlock
     omni.lib.add_unlock_recipe(omni.sea.tech4, "omni-tablet")
 
+    
+
     --Lets first make sure that all recipe unlocks get moved to other techs
     --(need to add them back to energy´s techs since SB removes them)
     --startup2
@@ -154,6 +156,10 @@ if mods["omnimatter_energy"] then
     omni.lib.remove_prerequisite("logistics", "logistics-0")
     omni.lib.add_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
 
+    --Enable early omnite bricks again (SB moves them to a tech?)
+    omni.lib.remove_unlock_recipe(omni.sea.tech4, "early-omnite-brick")
+    omni.lib.enable_recipe("early-omnite-brick")
+
     ---------------
     ---SCT FIXES---
     ---------------
@@ -198,6 +204,8 @@ if mods["omnimatter_energy"] then
             setPacks({{"energy-science-pack", 1}}):
             setCost(45):
             extend()
+
+        
 
         ----Unlock sct lab tech with the omnitor lab
         data.raw.technology["energy-science-pack"].unit = {count = 1, ingredients = {{"sb-lab-tool", 1}}, time = 5}

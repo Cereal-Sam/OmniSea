@@ -6,8 +6,23 @@ RecGen:import("sb-water-mineralized-crystallization"):
 	noTech():
 	extend()
 
---Final energy compat
+if mods["omnimatter_wood"] then
+	--Move wood recipes behind last startup tech
+    local lasttech
+    if data.raw.item["energy-science-pack"] then
+        lasttech = "energy-science-pack"
+    else
+        lasttech = omni.sea.tech4
+    end
+    omni.lib.add_unlock_recipe(lasttech, "wood-omnitraction")
+    omni.lib.add_unlock_recipe(lasttech, "wasteMutation")
+end
+
+--Final non-energy compat
 if not mods["omnimatter_energy"] then
+	--Move the Basic Extraction (and water-omnitraction)research behind the tutorial ones
+	omni.lib.add_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
+
 	-- Remove the fuel value of Omnite and crushed Omnite without omni energy
 	local remfuel = {
 		"omnite",

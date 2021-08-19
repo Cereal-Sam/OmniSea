@@ -1,8 +1,19 @@
 ---------------------------------------------------------------------------------------------------
+Version: 4.1.17
+Date: 2021.08.17
+  Bugfixes:
+    - Fixed that the easy omnite brick recipe got locked behind the last startup tech by SeaBlock
+      causing the omnitor lab to be uncraftable
+---------------------------------------------------------------------------------------------------
 Version: 4.1.16
-Date: ????
+Date: 2021.08.15
   Changes:
     - Added proper localisations for the modified startup techs to allow for translations
+    - Moved more recipes behind startup techs to give a better overvire of what needs to be done
+    - Use SeaBlocks remote interface to insert starting items directly into the rockchest
+    - Added some wood as starting items when playing with omniwood
+  Bugfixes:
+    - Fixed that the first startup tech existed twice with omniwood due to a typo
 ---------------------------------------------------------------------------------------------------
 Version: 4.1.15
 Date: 2021.08.14

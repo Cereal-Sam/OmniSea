@@ -22,20 +22,23 @@ data.raw.technology["sb-startup1"].icon_size = 64
 data.raw.technology["sb-startup1"].localised_name = {"technology-name.getting_omnite"}
 data.raw.technology["sb-startup1"].localised_description = {"technology-description.getting_omnite"}
 
+--Add initial omni extraction recipes as startup 1 unlock
+omni.lib.add_unlock_recipe("sb-startup1", "initial-omnitraction-angels-ore1")
+omni.lib.add_unlock_recipe("sb-startup1", "initial-omnitraction-angels-ore3")
+
+omni.lib.add_unlock_recipe(omni.sea.tech4, "omnite-brick")
+
 --Add Slag Processing 2 as prereq. for Hypomnic Water Omnitraction
 omni.lib.add_prerequisite("omnitech-hypomnic-water-omnitraction-1", "slag-processing-2")
 
 --Stop Seablock from adding my omnic-water-condensation recipe to a tech
-omni.lib.remove_unlock_recipe(omni.sea.tech4 , "omnic-water-condensation")
-omni.lib.remove_unlock_recipe(omni.sea.tech4 , "omnidensator-1")
+omni.lib.remove_unlock_recipe(omni.sea.tech4, "omnic-water-condensation")
+omni.lib.remove_unlock_recipe(omni.sea.tech4, "omnidensator-1")
 omni.lib.enable_recipe("omnidensator-1")
 omni.lib.enable_recipe("omnic-water-condensation")
 
---Move the Basic Extraction (and water-omnitraction)research behind the tutorial ones
-omni.lib.add_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
-
 --Omniwood compat: Add an early low-yield omnialgae recipe and fix the fuel value of wood
-if mods["omnimatter_wood"] then 
+if mods["omnimatter_wood"] then
     RecGen:create("OmniSea","omnialgae-processing-0"):
         setIngredients({type="fluid",name="water-purified",amount=100}, {type="item",name="omnite",amount=40}):
         setIcons("omnialgae","omnimatter_wood"):
@@ -43,12 +46,13 @@ if mods["omnimatter_wood"] then
         setEnergy(20.0):
         setCategory("bio-processing"):
         setSubgroup("omnisea-fluids"):
-        setEnabled(true):
+        setTechName("sb-startup1"):
+        setEnabled(false):
         extend()
-    
+
     --Move brown algae recipe to sb startup:
     RecGen:import("algae-green-simple"):
-        setTechName("sb-startup-1"):
+        setTechName("sb-startup1"):
         setEnabled(false):
         setHidden(false):
         addIngredients("omnialgae",40):
@@ -56,8 +60,6 @@ if mods["omnimatter_wood"] then
 
     data.raw.item["wood"].fuel_value = "6MJ"
     data.raw.item["omniwood"].fuel_value = "1MJ"
-
-    --TechGen:importIf("omniwaste"):removeUnlocks("wasteMutation"):extend()
 end
 
 local startuptechs = {
@@ -111,7 +113,7 @@ for _, pipes in pairs(data.raw.item) do
             then tier = 7 techreq =	{"omnitech-drilling-equipment-tungsten-pipe","omnitech-drilling-equipment-nitinol-pipe"} -- +15%
         else tier = 1
         end
-        
+
         baseout = 512		
         if tier == 1 then 
             bonus = 0
@@ -121,7 +123,7 @@ for _, pipes in pairs(data.raw.item) do
 
         local metal,check = string.gsub(pipes.name,"-pipe","")
         if check == 0 then metal = "iron" end
-        
+
     local drillrec = RecGen:create("OmniSea","omnic-water-fracking-".. pipes.name):
         setIngredients({type="fluid",name="coromnic-vapour",amount=100}, {type="item",name= pipes.name,amount=1}):
         setIcons("omnic-water"):
