@@ -1,8 +1,14 @@
 -- No free Water!
-data.raw.recipe["offshore-pump"].enabled = false
+seablock.lib.remove_recipe("offshore-pump")
+seablock.lib.hide_item("offshore-pump")
+seablock.lib.remove_recipe("ground-water-pump")
+seablock.lib.hide_item("ground-water-pump")
+omni.lib.remove_unlock_recipe("water-treatment", "ground-water-pump")
 
---Remove Angels Seafloor pump and add a prereq to washing-1
+--Remove Angels Seafloor pump
 omni.lib.remove_unlock_recipe("water-washing-1", "seafloor-pump")
+seablock.lib.remove_recipe("seafloor-pump")
+seablock.lib.hide_item("seafloor-pump")
 
 --Set initial omnitraction recipes (saph+stir) to be craftable in an electric omnitractor aswell
 data.raw.recipe["initial-omnitraction-angels-ore1"].category = "omnite-extraction-both"
@@ -31,12 +37,6 @@ omni.lib.add_unlock_recipe(seablock.final_scripted_tech, "omnite-brick")
 --Add Slag Processing 2 as prereq. for Hypomnic Water Omnitraction
 omni.lib.add_prerequisite("omnitech-hypomnic-water-omnitraction-1", "slag-processing-2")
 
---Stop Seablock from adding my omnic-water-condensation recipe to a tech
-omni.lib.remove_unlock_recipe(omni.sea.tech4, "omnic-water-condensation")
-omni.lib.remove_unlock_recipe(omni.sea.tech4, "omnidensator-1")
-omni.lib.enable_recipe("omnidensator-1")
-omni.lib.enable_recipe("omnic-water-condensation")
-
 --Omniwood compat: Add an early low-yield omnialgae recipe and fix the fuel value of wood
 if mods["omnimatter_wood"] then
     RecGen:create("OmniSea","omnialgae-processing-0"):
@@ -62,31 +62,12 @@ if mods["omnimatter_wood"] then
     data.raw.item["omniwood"].fuel_value = "1MJ"
 end
 
+--TODO: Can this table be removed entirely? I'm not sure
 local startuptechs = {
-    ['automation'] = true,
-    ['logistics'] = true,
-    ['optics'] = true,
-    ['turrets'] = true,
-    ['stone-walls'] = true,
-    ['basic-chemistry'] = true,
     ['ore-crushing'] = true,
     ['steel-processing'] = true,
-    ['military'] = true,
-    ['angels-sulfur-processing-1'] = true,
-    ['water-treatment'] = true,
-    ['water-washing-1'] = true,
-    ['slag-processing-1'] = true,
-    ['angels-fluid-control'] = true,
-    ['angels-metallurgy-1'] = true,
-    ['angels-iron-smelting-1'] = true,
-    ['angels-copper-smelting-1'] = true,
-    ['angels-coal-processing'] = true,
-    ['bio-wood-processing-2'] = true,
-    ['omnitech-basic-omnitraction'] = true,
-    ['basic-automation'] = true,
     ['omnitech-simple-automation'] = true,
     ['omnitech-base-impure-extraction'] = true,
-    ['landfill'] = true
 }
 
 for _,tech in pairs(data.raw.technology) do
@@ -194,3 +175,12 @@ end
 
 --Late update require
 require("prototypes.compat.omnimatter_energy.data-updates")
+
+-- Hide disabled recipes
+seablock.lib.remove_recipe("sort-gem-ore")
+seablock.lib.remove_recipe("slag-processing-1")
+seablock.lib.remove_recipe("slag-processing-2")
+seablock.lib.remove_recipe("slag-processing-3")
+seablock.lib.remove_recipe("slag-processing-4")
+seablock.lib.remove_recipe("slag-processing-5")
+seablock.lib.remove_recipe("slag-processing-6")

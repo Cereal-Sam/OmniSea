@@ -7,9 +7,7 @@ if mods["omnimatter_energy"] then
     local ignore_tech = {
         "omnitech-base-impure-extraction",
         "omnitech-simple-automation",
-        "gun-turret",
-        "stone-wall",
-        "steel-processing"
+        "steel-processing" -- TODO: Does steel need to be here?
     }
     for _,tech in pairs(data.raw.technology) do
         if not omni.lib.is_in_table(tech.name, ignore_tech) then
