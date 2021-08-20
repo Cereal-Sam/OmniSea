@@ -19,7 +19,7 @@ local function modify_starting_items()
         remote.call("freeplay", "set_created_items", {})
     end
 
-    --Add non entity starter items into Seablocks rocj chest
+    --Add non entity starter items into Seablocks rock chest
     local starter_items = {
         ["wood-pellets"] = 50,
         ["landfill"] = 200,

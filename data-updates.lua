@@ -26,7 +26,7 @@ data.raw.technology["sb-startup1"].localised_description = {"technology-descript
 omni.lib.add_unlock_recipe("sb-startup1", "initial-omnitraction-angels-ore1")
 omni.lib.add_unlock_recipe("sb-startup1", "initial-omnitraction-angels-ore3")
 
-omni.lib.add_unlock_recipe(omni.sea.tech4, "omnite-brick")
+omni.lib.add_unlock_recipe(seablock.final_scripted_tech, "omnite-brick")
 
 --Add Slag Processing 2 as prereq. for Hypomnic Water Omnitraction
 omni.lib.add_prerequisite("omnitech-hypomnic-water-omnitraction-1", "slag-processing-2")
@@ -91,7 +91,7 @@ local startuptechs = {
 
 for _,tech in pairs(data.raw.technology) do
     if startuptechs[tech.name] and omni.lib.is_in_table("slag-processing-1",tech.prerequisites) then
-        omni.lib.replace_prerequisite(tech.name,"slag-processing-1", omni.sea.tech4)
+        omni.lib.replace_prerequisite(tech.name,"slag-processing-1", seablock.final_scripted_tech)
     end
 end
 

@@ -3,7 +3,7 @@ if mods["omnimatter_energy"] then
     -----------------
     ---Tech  fixes---
     -----------------
-    --remove tech4 as prereq from all techs, if techs have no other prereqs then set auto sp as prereq
+    --remove seablock.final_scripted_tech as prereq from all techs, if techs have no other prereqs then set auto sp as prereq
     local ignore_tech = {
         "omnitech-base-impure-extraction",
         "omnitech-simple-automation",
@@ -13,8 +13,8 @@ if mods["omnimatter_energy"] then
     }
     for _,tech in pairs(data.raw.technology) do
         if not omni.lib.is_in_table(tech.name, ignore_tech) then
-            if omni.lib.is_in_table(omni.sea.tech4, tech.prerequisites) then
-                omni.lib.replace_prerequisite(tech.name, omni.sea.tech4, omni.sea.autosp)
+            if omni.lib.is_in_table(seablock.final_scripted_tech, tech.prerequisites) then
+                omni.lib.replace_prerequisite(tech.name, seablock.final_scripted_tech, omni.sea.autosp)
             end
             -- if (not tech.prerequisites) or (not next(tech.prerequisites)) then
             --     omni.lib.add_prerequisite(tech.name, omni.sea.autosp)
@@ -67,8 +67,8 @@ if mods["omnimatter_energy"] then
     ---Startup tech unlock fixes---
     -------------------------------
     --move energy science back to startup 4
-    omni.lib.add_unlock_recipe(omni.sea.tech4, "energy-science-pack")
-    omni.lib.remove_unlock_recipe(omni.sea.tech4, "automation-science-pack")
+    omni.lib.add_unlock_recipe(seablock.final_scripted_tech, "energy-science-pack")
+    omni.lib.remove_unlock_recipe(seablock.final_scripted_tech, "automation-science-pack")
 
     --Fix auto sp and lab unlocks
     omni.lib.add_unlock_recipe(omni.sea.autosp, "automation-science-pack")
@@ -78,7 +78,7 @@ if mods["omnimatter_energy"] then
     omni.lib.add_science_pack("automation", "automation-science-pack")
 
     --Add omni-tablet as red sp unlock
-    omni.lib.add_unlock_recipe(omni.sea.tech4, "omni-tablet")
+    omni.lib.add_unlock_recipe(seablock.final_scripted_tech, "omni-tablet")
 
     
 
@@ -99,11 +99,11 @@ if mods["omnimatter_energy"] then
     omni.lib.remove_unlock_recipe("sb-startup3", "lab")
 
     --startup4
-    omni.lib.remove_unlock_recipe(omni.sea.tech4, "omnitor-lab")
-    omni.lib.remove_unlock_recipe(omni.sea.tech4, "electric-mining-drill")
-    omni.lib.remove_unlock_recipe(omni.sea.tech4, "boiler")
-    omni.lib.remove_unlock_recipe(omni.sea.tech4, "steam-engine")
-    omni.lib.remove_unlock_recipe(omni.sea.tech4, "radar")
+    omni.lib.remove_unlock_recipe(seablock.final_scripted_tech, "omnitor-lab")
+    omni.lib.remove_unlock_recipe(seablock.final_scripted_tech, "electric-mining-drill")
+    omni.lib.remove_unlock_recipe(seablock.final_scripted_tech, "boiler")
+    omni.lib.remove_unlock_recipe(seablock.final_scripted_tech, "steam-engine")
+    omni.lib.remove_unlock_recipe(seablock.final_scripted_tech, "radar")
     omni.lib.add_unlock_recipe("omnitech-anbaricity", "radar")
 
     --Add omnicium recipes to startup1
@@ -154,7 +154,7 @@ if mods["omnimatter_energy"] then
     --Random tech fixes
     omni.lib.add_prerequisite(omni.lib.get_tech_name("yellow-filter-inserter"), "omnitech-burner-filter")
     omni.lib.remove_prerequisite("logistics", "logistics-0")
-    omni.lib.add_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
+    omni.lib.add_prerequisite("omnitech-base-impure-extraction", seablock.final_scripted_tech)
 
     --Enable early omnite bricks again (SB moves them to a tech?)
     omni.lib.remove_unlock_recipe(omni.sea.tech4, "early-omnite-brick")
@@ -216,7 +216,7 @@ if mods["omnimatter_energy"] then
         omni.lib.replace_prerequisite("omnitech-simple-automation", "sct-automation-science-pack", "energy-science-pack")
 
         omni.lib.remove_prerequisite("omnitech-base-impure-extraction", omni.sea.autosp)
-        omni.lib.remove_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
+        omni.lib.remove_prerequisite("omnitech-base-impure-extraction", seablock.final_scripted_tech)
         omni.lib.add_prerequisite("omnitech-base-impure-extraction", "energy-science-pack")
 
         --Add energy SP to new SB techs that miss it

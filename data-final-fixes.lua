@@ -12,7 +12,7 @@ if mods["omnimatter_wood"] then
     if data.raw.item["energy-science-pack"] then
         lasttech = "energy-science-pack"
     else
-        lasttech = omni.sea.tech4
+        lasttech = seablock.final_scripted_tech
     end
     omni.lib.add_unlock_recipe(lasttech, "wood-omnitraction")
     omni.lib.add_unlock_recipe(lasttech, "wasteMutation")
@@ -20,8 +20,8 @@ end
 
 --Final non-energy compat
 if not mods["omnimatter_energy"] then
-	--Move the Basic Extraction (and water-omnitraction)research behind the tutorial ones
-	omni.lib.add_prerequisite("omnitech-base-impure-extraction", omni.sea.tech4)
+	--Move the Basic Extraction (and water-omnitraction) research behind the tutorial ones
+	omni.lib.add_prerequisite("omnitech-base-impure-extraction", seablock.final_scripted_tech)
 
 	-- Remove the fuel value of Omnite and crushed Omnite without omni energy
 	local remfuel = {
