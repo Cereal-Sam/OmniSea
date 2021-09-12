@@ -29,7 +29,7 @@ if not mods["omnimatter_energy"] then
 		"crushed-omnite",
 	}
 
-	for _,entity in pairs(remfuel) do
+	for _, entity in pairs(remfuel) do
 		data.raw.item[entity].fuel_category = nil
 		data.raw.item[entity].fuel_value = nil
 	end

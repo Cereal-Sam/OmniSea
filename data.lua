@@ -33,12 +33,18 @@ for tech_name, modify_cost in pairs({
   end
 end
 
-for _,v in pairs({
+--Add starter recipes to seablocks table so they do not get locked behind techs
+for _, rec in pairs({
   "early-omnite-brick",
   "omnic-water-condensation",
   "omnidensator-1"
 }) do
-  seablock.startup_recipes[v] = true
+  seablock.startup_recipes[rec] = true
 end
 
-seablock.final_startup_tech = 'ore-crushing'
+--Repoint final startup tech to auto sp/ energy sp techs to avoid random techs being moved behind slag processing
+if mods["omnimatter_energy"] then
+  seablock.final_startup_tech = "energy-science-pack"
+else
+  seablock.final_startup_tech = seablock.final_scripted_tech
+end

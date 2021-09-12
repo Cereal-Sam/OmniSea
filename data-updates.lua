@@ -10,6 +10,7 @@ omni.lib.remove_unlock_recipe("water-washing-1", "seafloor-pump")
 seablock.lib.remove_recipe("seafloor-pump")
 seablock.lib.hide_item("seafloor-pump")
 
+--TODO Not required when starting with a burner omnitractor
 --Set initial omnitraction recipes (saph+stir) to be craftable in an electric omnitractor aswell
 data.raw.recipe["initial-omnitraction-angels-ore1"].category = "omnite-extraction-both"
 data.raw.recipe["initial-omnitraction-angels-ore3"].category = "omnite-extraction-both"
@@ -60,20 +61,6 @@ if mods["omnimatter_wood"] then
 
     data.raw.item["wood"].fuel_value = "6MJ"
     data.raw.item["omniwood"].fuel_value = "1MJ"
-end
-
---TODO: Can this table be removed entirely? I'm not sure
-local startuptechs = {
-    ['ore-crushing'] = true,
-    ['steel-processing'] = true,
-    ['omnitech-simple-automation'] = true,
-    ['omnitech-base-impure-extraction'] = true,
-}
-
-for _,tech in pairs(data.raw.technology) do
-    if startuptechs[tech.name] and omni.lib.is_in_table("slag-processing-1",tech.prerequisites) then
-        omni.lib.replace_prerequisite(tech.name,"slag-processing-1", seablock.final_scripted_tech)
-    end
 end
 
 -- Add Omnidrill recipes for all pipes
@@ -128,25 +115,6 @@ for _, pipes in pairs(data.raw.item) do
         drillrec:extend()
     end
 end
---[[
-        baseout = 512		
-        if tier == 1 then 
-            bonus = 0
-            techname = "omnidrill-1"
-            techpacks = nil
-            techcost = nil
-            techtime = nil
-            techicon = nil
-        else 
-            bonus = math.floor((baseout*0.4) + ((tier-2)*(baseout*0.15)))
-            techname = "drilling-equipment-"..tier
-            techpacks = 2+math.floor(tier/2)
-            techcost = (25+math.floor((tier/2)*25
-            techtime = 15
-            techicon = "Omnimatter","omnic-water"
-        end
---]]
-----log(serpent.block(data.raw.recipe))
 
 -- Add Omnicompressor Recipes
 for i, rec in pairs(data.raw.recipe) do		

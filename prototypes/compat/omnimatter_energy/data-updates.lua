@@ -1,25 +1,7 @@
 if mods["omnimatter_energy"] then
-
     -----------------
     ---Tech  fixes---
     -----------------
-    --remove seablock.final_scripted_tech as prereq from all techs, if techs have no other prereqs then set auto sp as prereq
-    local ignore_tech = {
-        "omnitech-base-impure-extraction",
-        "omnitech-simple-automation",
-        "steel-processing" -- TODO: Does steel need to be here?
-    }
-    for _,tech in pairs(data.raw.technology) do
-        if not omni.lib.is_in_table(tech.name, ignore_tech) then
-            if omni.lib.is_in_table(seablock.final_scripted_tech, tech.prerequisites) then
-                omni.lib.replace_prerequisite(tech.name, seablock.final_scripted_tech, omni.sea.autosp)
-            end
-            -- if (not tech.prerequisites) or (not next(tech.prerequisites)) then
-            --     omni.lib.add_prerequisite(tech.name, omni.sea.autosp)
-            -- end
-        end
-    end
-
     --Energy adds automation-science-pack as prereq for everything electricity related without prereqs, remove that from sb-startup-1 to avoid loops
     omni.lib.remove_prerequisite("sb-startup1", omni.sea.autosp)
 
